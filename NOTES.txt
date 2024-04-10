@@ -1,0 +1,20 @@
+npm init ------
+to create a package.json or node project. This will ask you the package name and other details
+
+npm init -y
+will create create node project with default data without asking anything
+
+npm install express
+install express
+
+npm install nodemon
+install nodemon. This will help auto rebuild the code without restarting the server
+without nodemon:
+node index.js
+with Nodemon:
+npm start
+(for npm start to work, we need to added in package.json -> scripts -> {'start': 'nodemon index.js'} )
+
+
+npm install dotenv
+To save env data like DB URL usernames API keys.
