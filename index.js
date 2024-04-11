@@ -1,14 +1,8 @@
 const express = require('express');
 require('dotenv').config();
 const mongoose = require('mongoose');
-const {
-    getAll,
-    getById,
-    createNew,
-    updateById,
-    deleteById,
-    isEmpty
-} = require('./controllers/UserController');
+const userRouter = require('./routes/UserRoutes');
+const productRouter = require('./routes/ProductRouter');
 
 
 const app = express();
@@ -19,12 +13,12 @@ app.use(express.json());
 /** 
  * User Routes
  */
-app.get('/api/users', getAll);
-app.get('/api/users/:id', getById);
-app.post('/api/users', isEmpty, createNew);
-app.patch('/api/users/:id', isEmpty, updateById);
-app.delete('/api/users/:id', deleteById);
+app.use('/api/users', userRouter);
 
+/** 
+ * Product Routes
+ */
+app.use('/api/products',productRouter);
 
 app.use((req, res) => {
     res.status(404).send({

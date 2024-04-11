@@ -19,7 +19,7 @@ const ProductSchema = mongoose.Schema({
     },
     categories:{
         required:true,
-        type: String
+        type: [String]
     },
     images:{
         type:[String]
@@ -34,6 +34,26 @@ const ProductSchema = mongoose.Schema({
         message:"Discount should be less than price"
         }
     },
+    description:{
+        type:String,
+        required:[true,'Please provide description'],
+        maxLength:[200,'Description should be less than 200 characters']
+    },
+    stock:{
+        type:Number,
+        required:[true,'Please provide stock'],
+        validate:{
+            validator:function(){
+            return this.stock >= 0
+            },
+            message:"Stock should be greater than 0"
+        }
+    },
+    brand:{
+        type:String,
+        required:[true,'Please provide brand']
+    },
+        
 });
 
 const ProductModal = mongoose.model('Products', ProductSchema);
