@@ -1,6 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 const userRouter = require('./routes/UserRoutes');
 const productRouter = require('./routes/ProductRouter');
 
@@ -9,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 3000
 
 app.use(express.json());
-
+app.use(cookieParser())
 /** 
  * User Routes
  */
@@ -19,6 +20,10 @@ app.use('/api/users', userRouter);
  * Product Routes
  */
 app.use('/api/products',productRouter);
+
+app.use((err, req, res)=>{
+    console.log("coming in error route handler")
+})
 
 app.use((req, res) => {
     res.status(404).send({

@@ -30,12 +30,12 @@ const getElementByIdFactory = (model) => async (req, res) => {
     try {
         const {id} = req.params;
         let data = null;
-        try {
+        // try {
             data = await model.findById(id);
-        } catch (error) {
-            console.log(error);
-        }
-        if(user){
+        // } catch (error) {
+        //     console.log(error);
+        // }
+        if(data){
             res.json({
                 'status': 'success',
                 'user': data
@@ -80,12 +80,21 @@ const updateElementByIdFactory = (model) => async (req, res) => {
     try {
         const {id} = req.params;
         let dataToUpdate = req.body;
-        let updatedRecord = await model.findByIdAndUpdate(id, dataToUpdate, {new:true})
-        res.status(200).json({
-            'status': 'success',
-            'message': 'user updated successfully',
-            'data': updatedRecord
-        })
+        // try {
+            let updatedRecord = await model.findByIdAndUpdate(id, dataToUpdate, {new:true})
+            res.status(200).json({
+                'status': 'success',
+                'message': 'user updated successfully',
+                'data': updatedRecord
+            })
+        // } catch (error) {
+        //     console.log("error in update", error);
+        //     res.status(500).send({
+        //         'status': 'error', 
+        //         'message': error
+        //     });
+        // }
+        
     } catch (error) {
         console.log("error occured");
         res.status(500).

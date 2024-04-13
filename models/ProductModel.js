@@ -56,6 +56,16 @@ const ProductSchema = mongoose.Schema({
         
 });
 
+// for model.findByIdAndUpdate
+ProductSchema.pre('findOneAndUpdate', function(next){
+    console.log("product schema findOneAndUpdate  hook");
+    if(this.price > 0){
+        next()
+    }else{
+        return next('Price must be greater than zero');
+    }
+})
+
 const ProductModal = mongoose.model('Products', ProductSchema);
 
 module.exports = ProductModal;
